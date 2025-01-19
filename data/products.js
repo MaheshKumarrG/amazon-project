@@ -22,9 +22,26 @@ class Product{
     this.rating = pDetails.rating;
     this.priceCents = pDetails.priceCents;
   }
+
+  extraHtml(){
+    return ``;
+  }
 }
 
+class Clothing extends Product{
+  sizeChartLink;
 
+  constructor(pDetails){
+    super(pDetails);
+    this.sizeChartLink = pDetails.sizeChartLink;
+  }
+
+  extraHtml(){
+    return `
+      <a href="${this.sizeChartLink}" target=_blank>Size Chart</a>
+    `;
+  }
+}
 
 
 export const products = [
@@ -687,5 +704,7 @@ export const products = [
     ]
   }
 ].map((pDetails)=>{
+  if(pDetails.type === 'clothing') return new Clothing(pDetails);
+
   return new Product(pDetails);
 });
