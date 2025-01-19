@@ -8,6 +8,24 @@ export function getProduct(productId){
   return matchingProduct;
 }
 
+class Product{
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(pDetails){
+    this.id = pDetails.id;
+    this.image = pDetails.image;
+    this.name = pDetails.name;
+    this.rating = pDetails.rating;
+    this.priceCents = pDetails.priceCents;
+  }
+}
+
+
+
 
 export const products = [
   {
@@ -668,4 +686,6 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((pDetails)=>{
+  return new Product(pDetails);
+});
