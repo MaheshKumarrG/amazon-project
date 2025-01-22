@@ -712,6 +712,15 @@ export const products = [
 
 export let products=[];
 
+function fetchProduct(){
+  fetch('https://supersimplebackend.dev/products').then((response)=>{
+    return response.json();
+  }).then((productData)=>{
+    console.log(productData);
+  })
+}
+fetchProduct();
+
 export function loadProducts(func){
   const xhr = new XMLHttpRequest();
 
