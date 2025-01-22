@@ -717,27 +717,33 @@ function fetchProduct(){
     return response.json();
   }).then((productData)=>{
     // console.log(productData);
-  })
+  }).catch(()=>{
+    console.log('found an error, Try again later')
+  });
 }
 fetchProduct();
 
 export function loadProducts(func){
-  const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
 
-  xhr.addEventListener('load',()=>{
-    products = JSON.parse(xhr.response).map((pDetails)=>{
-      if(pDetails.type === 'clothing') return new Clothing(pDetails);
-    
-      return new Product(pDetails);
+    xhr.addEventListener('load',()=>{
+        products = JSON.parse(xhr.response).map((pDetails)=>{
+        if(pDetails.type === 'clothing') return new Clothing(pDetails);
+        
+        return new Product(pDetails);
+        });
+
+        console.log('working...');
+
+        func();
     });
-
-    console.log('working...');
-
-    func();
-  });
-
-  xhr.open('GET','https://supersimplebackend.dev/products');
-  xhr.send();
+    
+    xhr.addEventListener('error',()=>{
+        console.log('found an error, Please try again later');
+    })
+    
+    xhr.open('GET','https://supersimplebackend.dev/products');
+    xhr.send();
 }
 
 loadProducts();
