@@ -716,7 +716,7 @@ function fetchProduct(){
   fetch('https://supersimplebackend.dev/products').then((response)=>{
     return response.json();
   }).then((productData)=>{
-    console.log(productData);
+    // console.log(productData);
   })
 }
 fetchProduct();
